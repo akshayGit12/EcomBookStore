@@ -44,6 +44,4 @@ public class BooksExcelFile {
 	@Column(name = "updateDate")
 	private LocalDateTime updateDate;
 	
-	
-
 }
