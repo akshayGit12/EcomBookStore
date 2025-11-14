@@ -21,6 +21,4 @@ public interface UserRegisterService {
 	public List<UserRegister> getAllUsersRegisterDetails();
 
 	
-	
-
 }

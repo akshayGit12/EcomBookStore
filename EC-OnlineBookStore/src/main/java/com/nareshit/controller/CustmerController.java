@@ -22,6 +22,7 @@ import com.nareshit.model.ResponseMessage;
 import com.nareshit.service.CustmerService;
 import com.nareshit.utility.Constants;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -31,11 +32,8 @@ public class CustmerController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CustmerController.class);
 	
-	
-	
 	@Autowired CustmerService custmerService;
 	
-
 	 @Operation(summary = "Create User Custmers",description = "e commerece online books store  register the users")
 	    @ApiResponses({
 	     @ApiResponse(responseCode = "201",description = "user register successfully"),
@@ -157,5 +155,15 @@ public class CustmerController {
 	  		    }
 	  			
 	  			}
-	  		}  
+	        
+	        @GetMapping("/getData")
+	        @CircuitBreaker(name = "showData", fallbackMethod ="fallbackGetData")
+	        public String showData() throws Exception {
+	        	throw new Exception();
+	        }
+	        public String fallbackGetData(Throwable t) {
+	            return "Service temporarily unavailable: " + t.getMessage();
+	        }
+
+	  }  
 	        

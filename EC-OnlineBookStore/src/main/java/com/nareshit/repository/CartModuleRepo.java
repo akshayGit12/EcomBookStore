@@ -10,5 +10,4 @@ public interface CartModuleRepo extends JpaRepository<CartModule, Long>{
 
 	CartModule findByCustomerAndBooksModule(Customer customer, BooksModule booksModule);
 
-
 }

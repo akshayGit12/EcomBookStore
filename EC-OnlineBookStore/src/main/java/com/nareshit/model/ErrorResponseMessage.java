@@ -19,6 +19,5 @@ public class ErrorResponseMessage {
 		this.message = message;
 		this.list = list;
 	}
-	
-	
+		
 }

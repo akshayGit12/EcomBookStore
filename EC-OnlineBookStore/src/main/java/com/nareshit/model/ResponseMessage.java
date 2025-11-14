@@ -39,6 +39,4 @@ public class ResponseMessage {
 		this.list = list;
 	}
 
-
-
 }

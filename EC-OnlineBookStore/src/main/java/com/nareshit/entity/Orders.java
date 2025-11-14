@@ -16,33 +16,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "register") // it is optional
+@Table(name = "orders") // it is optional
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRegister {
+public class Orders {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "firstName")
-	private String firstName;
-	@Column(name = "lastName")
-	private String lastName;
-
-	@Column(name = "email")
-	private String email;
-	@Column(name = "password")
-	private String password;
-
-	@Column(name = "contactId")
-	private long contactId;
 	
-	@Column(name = "prime", columnDefinition = "TINYINT(1")
-	private Boolean prime;
+	@Column(name = "bookId")
+	private Long bookID;
 	
+	@Column(name = "custmerId")
+	private Long custmerId;
+	
+	private Boolean status;
 	@CreationTimestamp
-	@Column(name = "createdDate")
+	@Column(name = "createdDate" ,updatable = false)
 	public LocalDateTime createdDate;
 	
 	
@@ -50,5 +42,4 @@ public class UserRegister {
 	@Column(name = "updatedDate")
 	public LocalDateTime updatedDate;
 	
-
 }
