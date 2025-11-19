@@ -4,21 +4,21 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.nareshit.entity.BooksModule;
 import com.nareshit.entity.Orders;
 
 public interface OrderModuleRepo extends JpaRepository<Orders, Long> {
 
-    //Custom query to find all orders placed by a specific customer within the last 7 days.
-   // This is useful for restricting non-prime users from placing  more than one order per week.
-	  @Query(value = "SELECT * FROM orders o WHERE o.custmer_id = :customerId AND o.created_date > CURDATE() - INTERVAL 7 DAY", nativeQuery = true)
-	  public List<Orders> findAnyLastweekPlaced(Long customerId);
+    // Last 7 days orders by a customer
+    @Query(value = "SELECT * FROM orders o WHERE o.custmer_id = :customerId AND o.created_date > CURDATE() - INTERVAL 7 DAY",
+           nativeQuery = true)
+    List<Orders> findAnyLastweekPlaced(@Param("customerId") Long customerId);
 
-	  
-	    //whether a book with the given title actually exists or not.
-	  @Query(value = "SELECT b FROM BooksModule b WHERE b.title = :title")
-	  public BooksModule findByBookName(String title);
-
+    // Find by book title
+    @Query("SELECT b FROM BooksModule b WHERE b.title = :title")
+    BooksModule findByBookName(@Param("title") String title);
 
 }
+
